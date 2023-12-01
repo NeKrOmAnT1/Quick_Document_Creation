@@ -1,0 +1,73 @@
+﻿<mah:MetroWindow x:Class="Quick_Document_Creation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quick_Document_Creation"
+        
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 
+        xmlns:viewModels="clr-namespace:Quick_Document_Creation.ViewModels"
+                 
+        mc:Ignorable="d"
+        Title="Создание документа" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <!--#region Стиль окна-->
+        <mah:MetroWindow.LeftWindowCommands>
+            <mah:WindowCommands>
+                <iconPacks:PackIconModern Width="22"
+                                  Height="22"
+                                  Kind="Page" />
+            </mah:WindowCommands>
+        </mah:MetroWindow.LeftWindowCommands>
+        <mah:MetroWindow.RightWindowCommands>
+            <mah:WindowCommands>
+                <Button Command="{Binding PrintDocCommand}">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks:PackIconModern Width="22"
+                                        Height="22"
+                                        VerticalAlignment="Center"
+                                        Kind="Printer"/>
+                                <TextBlock Margin="4 0 0 0"
+                         VerticalAlignment="Center"
+                         Text="Распечатать документ" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </mah:WindowCommands>
+        </mah:MetroWindow.RightWindowCommands>
+        <!--#endregion-->
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+        <StackPanel Orientation="Horizontal">
+        <Label Content="Выберите тип документа:" FontSize="20" />
+        <ComboBox SelectedItem="{Binding SelectDoc}" FontSize="20" Width="auto">
+            <ComboBoxItem FontSize="15" Content="Справка с места учебы" Tag="Справка №1"/>
+            <ComboBoxItem FontSize="15" Content="Справка для военкомата" Tag="Справка №2"/>
+        </ComboBox>
+        </StackPanel>
+            
+        <StackPanel>
+         
+        <TextBox FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Date}" materialDesign:HintAssist.Hint="Дата выдачи" Width="300"/>
+                <TextBox FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Сourse}" materialDesign:HintAssist.Hint="Курс" Width="300"/>
+        <TextBox FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding FIO}" materialDesign:HintAssist.Hint="ФИО студента" Width="300"/>
+        <TextBox FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Group}" materialDesign:HintAssist.Hint="Группа" Width="300"/>
+                <ComboBox SelectedItem="{Binding Forma}" materialDesign:HintAssist.Hint="Форма обучения" FontSize="20" Width="300">
+                    <ComboBoxItem Content="Очная" Tag="Очная"/>
+                    <ComboBoxItem Content="Заочная" Tag="Заочная"/>
+                </ComboBox>
+        </StackPanel>
+            <Button Margin="10" Command="{Binding CreatDocCommand}" Width="auto" Content="Создать" Style="{StaticResource MaterialDesignFlatButton}"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>
